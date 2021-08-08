@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::resource('barang', 'BarangController');
+Route::resource('kategori', 'KategoriController');
+Route::resource('kerusakan', 'BarangRusakController');

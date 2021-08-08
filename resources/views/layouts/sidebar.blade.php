@@ -17,10 +17,10 @@
             </li>
 
             <li>
-                <a href="#" class="nav-link"><i class="fas fa-object-ungroup"></i> <span>Kategori</span></a>
+                <a href="{{ route('kategori.index') }}" class="nav-link"><i class="fas fa-object-ungroup"></i> <span>Kategori</span></a>
             </li>
             <li>
-                <a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Asset Rusak</span></a>
+                <a href="{{ route('kerusakan.index') }}" class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Asset Rusak</span></a>
             </li>
             <li>
                 <a href="#" class="nav-link"><i class="fas fa-hands-helping"></i> <span>Peminjaman</span></a>
