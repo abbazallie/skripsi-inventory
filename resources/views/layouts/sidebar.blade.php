@@ -23,10 +23,10 @@
                 <a href="{{ route('kerusakan.index') }}" class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Asset Rusak</span></a>
             </li>
             <li>
-                <a href="#" class="nav-link"><i class="fas fa-hands-helping"></i> <span>Peminjaman</span></a>
+                <a href="{{ route('peminjaman.index') }}" class="nav-link"><i class="fas fa-hands-helping"></i> <span>Peminjaman</span></a>
             </li>
             <li>
-                <a href="#" class="nav-link"><i class="fas fa-users-cog"></i> <span>User Management</span></a>
+                <a href="{{ route('user.index') }}" class="nav-link"><i class="fas fa-users-cog"></i> <span>User Management</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Laporan</span></a>

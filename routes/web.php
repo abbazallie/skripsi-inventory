@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::resource('barang', 'BarangController');
 Route::resource('kategori', 'KategoriController');
 Route::resource('kerusakan', 'BarangRusakController');
+Route::resource('user', 'UserController');
+Route::resource('peminjaman', 'PeminjamanController');
+
+
+Route::post('/tampil', 'ShowController@show')->name('tampil');
+Route::post('simpan', 'ShowController@simpan')->name('simpan');

@@ -11,7 +11,7 @@ class BarangController extends Controller
    
     public function index()
     {
-        $barang = Barang::with('kategori')->latest()->paginate(6);;
+        $barang = Barang::with('kategori')->latest()->paginate(6);
         return view('data_barang', compact('barang'))->with('i', (request()->input('page', 1) - 1) * 6);
     }
 
@@ -88,6 +88,7 @@ class BarangController extends Controller
         $barang->tgl_masuk = $request->tgl_masuk;
         $barang->save();
         return redirect()->route('barang.index')->with('success', 'Data berhasil diedit!');
+  
     }
 
     public function destroy($id)

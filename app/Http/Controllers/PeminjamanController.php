@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\BarangRusak;
 use App\Barang;
+use App\Peminjaman;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class BarangRusakController extends Controller
+class PeminjamanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class BarangRusakController extends Controller
      */
     public function index()
     {
-        $barangRusak = BarangRusak::with('barang')->latest()->paginate('6');
-        return view('barang_rusak', compact('barangRusak'))->with('i', (request()->input('page', 1) - 1) * 6);
+        $peminjam = Peminjaman::with('barang')->latest()->paginate('6');
+        return view('data_peminjaman', compact('peminjam'))->with('i', (request()->input('page', 1) - 1) * 6);
     }
 
     /**
@@ -28,7 +27,7 @@ class BarangRusakController extends Controller
     public function create()
     {
         $barang = Barang::all();
-        return view('tambah_barangrusak', compact('barang'));
+        return view('tambah_peminjam', compact('barang'));
     }
 
     /**
@@ -39,8 +38,7 @@ class BarangRusakController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+        //
     }
 
     /**
@@ -49,9 +47,9 @@ class BarangRusakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        
+        //
     }
 
     /**

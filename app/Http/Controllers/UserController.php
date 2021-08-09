@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\BarangRusak;
-use App\Barang;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class BarangRusakController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,8 @@ class BarangRusakController extends Controller
      */
     public function index()
     {
-        $barangRusak = BarangRusak::with('barang')->latest()->paginate('6');
-        return view('barang_rusak', compact('barangRusak'))->with('i', (request()->input('page', 1) - 1) * 6);
+        $user = User::latest()->paginate(5);
+        return view('user.daftar_user', compact('user'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -27,8 +25,7 @@ class BarangRusakController extends Controller
      */
     public function create()
     {
-        $barang = Barang::all();
-        return view('tambah_barangrusak', compact('barang'));
+        return view('user.tambah_user');
     }
 
     /**
@@ -39,8 +36,25 @@ class BarangRusakController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+        $validation = $request->validate([
+            'nama'=> 'required',
+            'username'=>'required',
+            'password' => 'required|min:6',
+            'level' => 'required',
+        ],[
+            'nama.required' => 'Nama barang harus diisi!',
+            'username.required' => 'Username barang harus diisi!',
+            'password.required' => 'Password harus diisi minimal 6 karakter!',
+            'level'     => 'Level harus diisi!',
+        ]);
+
+        $user = new User;
+        $user ->nama = $request->nama;
+        $user ->username = $request->username;
+        $user ->password = bcrypt($request->passwod);
+        $user ->level = $request->level;
+        $user->save();
+        return redirect()->route('user.index')->with('success','User berhasil ditambahkan!');
     }
 
     /**
@@ -49,9 +63,9 @@ class BarangRusakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -85,6 +99,8 @@ class BarangRusakController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('barang.index')->with('success', 'Data berhasil dihapus');
     }
 }

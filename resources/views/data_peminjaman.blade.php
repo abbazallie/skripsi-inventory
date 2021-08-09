@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('sub-judul','Asset Rusak')
+@section('sub-judul','Data Peminjaman')
 @push('library-styles')
 @endpush
 @section('content')
@@ -17,38 +17,40 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <a href="{{ route('kerusakan.create') }}" class="btn btn-dark">
-                    <i class="fas fa-plus-circle"></i> Tambah Barang 
+                <a href="{{ route('peminjaman.create') }}" class="btn btn-dark">
+                    <i class="fas fa-plus-circle"></i> Tambah Peminjam 
                     <span class="badge badge-transparent btn-icon icon-right"></span>
                 </a>
             </div>
             <div class="text-center">
-                <h4> Data Kerusakan Barang Inventaris SMA Darunnajah</h4>
+                <h4> Data Peminjam Barang Inventaris SMA Darunnajah</h4>
             </div>
             <table class="table table-md table-hover">
             <thead>
               <tr>
                 <th scope="col">No</th>
+                <th scope="col">Nama Peminjam</th>
                 <th scope="col">Nama Barang</th>
                 <th scope="col">Ruang/Tempat</th>
                 <th scope="col">Jumlah</th>
-                <th scope="col">Tanggal Pendataan</th>
-                <th scope="col">Keterangan Kerusakan</th>
+                <th scope="col">Tanggal Peminjamn</th>
+                <th scope="col">Keperluan</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-                @foreach ($barangRusak as $rsk)
+                @foreach ($peminjam as $pjm)
               <tr>
                   <th scope="row">{{ ++$i }}</th>
-                  <th scope="row">{{ $rsk->barang->nama_brg }}</th>
-                  <th scope="row">{{ $rsk->barang->tempat_brg }}</th>
-                  <td scope="row">{{ $rsk->jml_brg }}</td>
-                  <td scope="row">{{ $rsk->tgl_rsk }}</td>
-                  <td scope="row">{{ $rsk->keterangan }}</td>
+                  <th scope="row">{{ $pjm->nama_pjm }}</th>
+                  <th scope="row">{{ $pjm->barang->nama_brg }}</th>
+                  <th scope="row">{{ $pjm->barang->tempat_brg }}</th>
+                  <td scope="row">{{ $pjm->jml_brg }}</td>
+                  <td scope="row">{{ $pjm->tgl_pjm }}</td>
+                  <td scope="row">{{ $pjm->keterangan }}</td>
                   <td scope="row">
-                      <form action="{{ route('kerusakan.destroy', $rsk->id) }}" method="POST">
-                      <a href="{{ route('kerusakan.edit', $rsk->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>Edit</a>
+                      <form action="{{ route('peminjaman.destroy', $pjm->id) }}" method="POST">
+                      <a href="{{ route('peminjaman.edit', $pjm->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>Edit</a>
                         |
                         @csrf
                         @method('DELETE')
@@ -59,7 +61,7 @@
               @endforeach
             </tbody>
           </table>
-          {{ $barangRusak->links() }}
+          {{ $peminjam->links() }}
         </div>
     </div>
 </div>

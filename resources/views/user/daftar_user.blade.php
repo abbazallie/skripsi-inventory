@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('sub-judul','Asset Rusak')
+@section('sub-judul','Administrator')
 @push('library-styles')
 @endpush
 @section('content')
@@ -17,38 +17,34 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <a href="{{ route('kerusakan.create') }}" class="btn btn-dark">
-                    <i class="fas fa-plus-circle"></i> Tambah Barang 
+                <a href="{{ route('user.create') }}" class="btn btn-dark">
+                    <i class="fas fa-plus-circle"></i> Tambah User 
                     <span class="badge badge-transparent btn-icon icon-right"></span>
                 </a>
             </div>
             <div class="text-center">
-                <h4> Data Kerusakan Barang Inventaris SMA Darunnajah</h4>
+                <h4> Daftar Administrator</h4>
             </div>
             <table class="table table-md table-hover">
             <thead>
               <tr>
                 <th scope="col">No</th>
-                <th scope="col">Nama Barang</th>
-                <th scope="col">Ruang/Tempat</th>
-                <th scope="col">Jumlah</th>
-                <th scope="col">Tanggal Pendataan</th>
-                <th scope="col">Keterangan Kerusakan</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Username</th>
+                <th scope="col">Level</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-                @foreach ($barangRusak as $rsk)
+                @foreach ($user as $use)
               <tr>
                   <th scope="row">{{ ++$i }}</th>
-                  <th scope="row">{{ $rsk->barang->nama_brg }}</th>
-                  <th scope="row">{{ $rsk->barang->tempat_brg }}</th>
-                  <td scope="row">{{ $rsk->jml_brg }}</td>
-                  <td scope="row">{{ $rsk->tgl_rsk }}</td>
-                  <td scope="row">{{ $rsk->keterangan }}</td>
+                  <th scope="row">{{ $use->nama }}</th>
+                  <th scope="row">{{ $use->username }}</th>
+                  <td scope="row">{{ $use->level }}</td>
                   <td scope="row">
-                      <form action="{{ route('kerusakan.destroy', $rsk->id) }}" method="POST">
-                      <a href="{{ route('kerusakan.edit', $rsk->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>Edit</a>
+                      <form action="{{ route('user.destroy', $use->id) }}" method="POST">
+                      <a href="{{ route('user.edit', $use->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>Edit</a>
                         |
                         @csrf
                         @method('DELETE')
@@ -59,7 +55,7 @@
               @endforeach
             </tbody>
           </table>
-          {{ $barangRusak->links() }}
+          {{ $user->links() }}
         </div>
     </div>
 </div>
