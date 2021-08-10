@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKategorisTable extends Migration
+class CreateItemQtyHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateKategorisTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategori', function (Blueprint $table) {
-            $table->bigIncrements('kategori_id');
-            $table->string('nama_kategori');
+        Schema::create('item_qty_histories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('item_id')->onDelete('cascade');
+            $table->integer('amount')->default(0);
+            $table->integer('current_stock')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateKategorisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori');
+        Schema::dropIfExists('item_qty_histories');
     }
 }
