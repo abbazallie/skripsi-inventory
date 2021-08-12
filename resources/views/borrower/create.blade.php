@@ -49,7 +49,7 @@
 
                 <div class="form-group col-md-2">
                     <label>Jumlah Barang</label>
-                        <input type="number" class="form-control" id="itemStock" value="{{ $brg->jml_brg }}"  disabled="">
+                        <input type="number" class="form-control" id="itemStock"  disabled="">
                     </div>
                 <div class="form-group col-md-2">
                     <label for="qty">Jumlah Peminjaman</label>
