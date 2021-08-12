@@ -13,13 +13,12 @@ class CreateItemDemagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_demages', function (Blueprint $table) {
+        Schema::create('item_damages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id')->onDelete('cascade');
             $table->integer('amount')->default(0);
             $table->date('damage_date');
-            $table->foreignId('place_id')->onDelete('cascade');
-            $table->mediumText('notes');
+            $table->mediumText('notes')->nullable();
             $table->timestamps();
         });
     }

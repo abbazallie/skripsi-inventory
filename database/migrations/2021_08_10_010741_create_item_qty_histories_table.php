@@ -16,6 +16,7 @@ class CreateItemQtyHistoriesTable extends Migration
         Schema::create('item_qty_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id')->onDelete('cascade');
+            $table->enum('type',['in','out']);
             $table->integer('amount')->default(0);
             $table->integer('current_stock')->default(0);
             $table->timestamps();

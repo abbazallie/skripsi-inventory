@@ -24,11 +24,11 @@
                     @csrf
                     <div class="form-group">
                         <div class="input-group mb-3">
-                          <input type="text" name="nama_kategori" class="form-control @error('nama_kategori') is-invalid @enderror" placeholder="Nama kategori" aria-label="">
+                          <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama kategori" aria-label="">
                           <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Simpan</button>
                           </div>
-                          @error('nama_kategori')
+                          @error('name')
                           <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
                         </div>
@@ -36,9 +36,6 @@
                 </form>
             </div>
             <div>
-                <div class="text-center">
-                    <h4> Daftar Kategori Barang </h4>
-                </div>
                 <table class="table table-md table-hover">
                 <thead>
                   <tr>
@@ -48,13 +45,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($kategori as $ktg)
+                    @foreach ($categories as $ktg)
                   <tr>
-                      <th scope="row">{{ ++$i }}</th>
-                      <td scope="row">{{ $ktg->nama_kategori }}</td>
+                      <th scope="row">{{ $loop->iteration }}</th>
+                      <td scope="row">{{ $ktg->name }}</td>
                       <td scope="row">
-                          <form action="{{ route('kategori.destroy', $ktg->id) }}" method="POST">
-                          <a href="{{ route('kategori.edit', $ktg->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>Edit</a>
+                          <form action="{{ route('category.destroy', $ktg->id) }}" method="POST">
+                          <a href="{{ route('category.edit', $ktg->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>Edit</a>
                             |
                             @csrf
                             @method('DELETE')
@@ -65,7 +62,7 @@
                   @endforeach
                 </tbody>
               </table>
-              {{ $kategori->links() }}
+              {{ $categories->links() }}
             </div>
         </div>
     </div>

@@ -17,11 +17,17 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::resource('barang', 'BarangController');
-Route::resource('kategori', 'KategoriController');
-Route::resource('kerusakan', 'BarangRusakController');
+// Route::resource('barang', 'BarangController');
+// Route::resource('kategori', 'KategoriController');
+// Route::resource('kerusakan', 'BarangRusakController');
 Route::resource('user', 'UserController');
-Route::resource('peminjaman', 'PeminjamanController');
+// Route::resource('peminjaman', 'PeminjamanController');
+
+Route::resource('item', 'ItemController');
+Route::resource('category', 'CategoryController');
+Route::resource('damage', 'DamageController');
+Route::resource('borrower', 'BorrowerController');
+Route::resource('report', 'ReportController');
 
 
 Route::post('/tampil', 'ShowController@show')->name('tampil');
