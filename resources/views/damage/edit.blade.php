@@ -16,8 +16,8 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <form action="{{ route('damage.store')}}" method="POST">
-                    @csrf
+                <form action="{{ route('damage.update',$damage->id)}}" method="POST">
+                    @csrf @method('PUT')
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -53,7 +53,7 @@
                     <div class="row mt-1">
                         <div class="col-md-6 form-group">
                             <label for="">Masukkan jumlah rusak</label>
-                            <input type="number" name="amount" min="0" max="{{ $damage->item->getStock() }}" class="form-control @error('amount') is-invalid @enderror"  placeholder="Jumlah Barang" id="jm" value="{{ old('amount',$damage->amount) }}">
+                            <input type="number" name="amount" min="0" max="{{ $damage->item->getStock() + $damage->amount }}" class="form-control @error('amount') is-invalid @enderror"  placeholder="Jumlah Barang" id="jm" value="{{ old('amount',$damage->amount) }}">
                             @error('amount')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

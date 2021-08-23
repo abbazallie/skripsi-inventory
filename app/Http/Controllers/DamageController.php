@@ -87,9 +87,44 @@ class DamageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ItemDamage $damage)
     {
-        //
+        // Jumlah awal sebelum diedit
+        $firstAmount = $damage->amount;
+
+        $validated = $request->validate([
+            'item_id' => 'required|numeric',
+            'amount'  => 'required|numeric|min:0',
+            'damage_date' => 'required|date',
+            'notes'   => 'sometimes|nullable|string'
+        ]);
+
+        $damage->update($validated);
+
+        if($firstAmount != $validated['amount']) {
+            if($validated['amount'] < $firstAmount) {
+
+                // Jika jumlah setelah diedit lebih kecil dari jumlah sebelumnya maka menambah stok barang tsb.
+                ItemQtyHistory::create([
+                    'item_id'   => $damage->item_id,
+                    'type'      => 'in',
+                    'amount'    => $firstAmount - $validated['amount'], // mencari selisih stok awal dan baru
+                    'current_stock' => $damage->item->getStock() + ($firstAmount - $validated['amount'])
+                ]);
+            } else {
+
+                // Jika jumlah setelah diedit lebih besar dari jumlah sebelumnya maka mengurangi stok barang tsb.
+                ItemQtyHistory::create([
+                    'item_id'   => $damage->item_id,
+                    'type'      => 'out',
+                    'amount'    => $validated['amount'] - $firstAmount, // mencari selisih stok awal dan baru
+                    'current_stock' => $damage->item->getStock() - ($validated['amount'] - $firstAmount)
+                ]);
+            }
+        }
+        
+
+        return redirect()->route('damage.index')->with('success','Berhasil menyimpan');
     }
 
     /**

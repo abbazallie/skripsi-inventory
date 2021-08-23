@@ -145,17 +145,17 @@ class ItemController extends Controller
                         $amount = $validated['amount'];
                     }
                     
-                    $current_stock = $item->getStock() - $amount;
+                    // $current_stock = $validated['amount'];
                 } else {
                     $type = 'in';
                     $amount = $validated['amount'] - $item->getStock();
-                    $current_stock = $item->getStock() + $amount;
+                    // $current_stock = $validated['amount'];
                 }
                 ItemQtyHistory::create([
                     'item_id'   => $item->id,
                     'amount'    => $amount,
                     'type'      => $type,
-                    'current_stock' => $current_stock
+                    'current_stock' => $validated['amount']
                 ]);
             }
 
